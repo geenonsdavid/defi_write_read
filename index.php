@@ -51,8 +51,6 @@ if (!empty($_GET['id'])){
     include_once 'affichage.php';
 }
 
- 
-   
 } catch (PDOException $e) {
 
     // envoyer l'erreur dans un fichier error.txt
