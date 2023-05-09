@@ -35,6 +35,7 @@ $request ='SELECT COUNT(*) AS nb_messages FROM messages';
 $pdoStatement = $pdo->prepare($request);
 $pdoStatement->execute();
 $nb_messages = $pdoStatement->fetch(PDO::FETCH_ASSOC);
+echo "<div class='alert alert-primary w-25 m-2' role='alert'>Il y a " . $nb_messages['nb_messages'] . " messages</div>";
 
 // Récupération des messages
 
