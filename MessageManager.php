@@ -13,12 +13,11 @@ class MessageManager
     {
         $this->pdo = $pdo;
     }
+
     public function addMessage(string $content): bool
     {
         $request = $this->pdo->prepare('INSERT INTO messages (message) VALUES (:message)');
-        $request->execute([
-            'message' => $content
-        ]);
-        return true;
+        $request->bindParam(':message', $content);
+        return $request->execute();
     }
 }
