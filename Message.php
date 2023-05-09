@@ -1,24 +1,24 @@
 <?php
 class Message {
     private $id;
-    private $message;
+    private $content;
     private $date;
 
-    public function __construct($message, $date, $id) {
-        $this->message = $message;
-        $this->date = $date;
-        $this->id = $id;
+    public function __construct(string $content) {
+        $this->content = $content;
+        $this->date = new DateTime();
     }
 
-    public function getMessage() {
-        return $this->message;
+    public function getId() {
+        return $this->id;
+    }
+    public function getContent() {
+        return $this->content;
     }
 
     public function getDate() {
         return $this->date;
     }
-    public function getId() {
-        return $this->id;
-    }
+
     
 }
