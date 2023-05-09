@@ -26,8 +26,15 @@ $pdo->exec("USE defi");
 include_once 'create_table_messages.php';
 
 // Ajout d'un message
+
 include_once 'form.php';
 
+
+// connaitre nombre de messages
+$request ='SELECT COUNT(*) AS nb_messages FROM messages';
+$pdoStatement = $pdo->prepare($request);
+$pdoStatement->execute();
+$nb_messages = $pdoStatement->fetch(PDO::FETCH_ASSOC);
 
 // Récupération des messages
 
