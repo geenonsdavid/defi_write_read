@@ -10,28 +10,24 @@
 </head>
 <body>
 <?php
-include_once 'connexion.php';
+try{
+
+require 'connexion.php';
 include_once 'Message.php';
 
-?>
-<form class="w-25" method="POST" action="">
-<label for="message" class="form-label form-control-lg">Message :</label>
-<textarea name="message" id="message" cols="30" rows="1" class="form-control"></textarea>
-<button type="submit" class="btn btn-primary m-2">Envoyer</button>
-</form>
-<?php
+// create database defi
 
+$pdo->exec("CREATE DATABASE IF NOT EXISTS defi");
 
-    if(empty($_POST["message"])){
-       // affiche alerte
-         echo "<div class='alert alert-danger w-25 m-2' role='alert'>Veuillez saisir un message</div>";
-    }
-    else {
-    // affiche alerte
-    echo "<div class='alert alert-success w-25 m-2' role='alert'>Message envoyé</div>";
-    // Ajout d'un message     
-    $pdo->exec("INSERT INTO messages (message) VALUES ('$_POST[message]')");
-    }
+// use database defi
+$pdo->exec("USE defi");
+
+// create table messages
+include_once 'create_table_messages.php';
+
+// Ajout d'un message
+include_once 'form.php';
+
 
 // connaitre nombre de messages
 $request ='SELECT COUNT(*) AS nb_messages FROM messages';
@@ -54,6 +50,16 @@ while ($message = $request->fetch(PDO::FETCH_ASSOC)) {
     echo "<a href='delete.php?id=" . $message['id'] . "' class='btn btn-danger'>Supprimer</a>";
     echo "</div>";
     echo "</div>";
+}
+}
+catch(PDOException $e){
+    
+    if ($e->getCode() == 1045){
+        echo "<div class='alert alert-danger w-25 m-2' role='alert'>Erreur de connexion à la base de données</div>";
+    }
+    else {
+        echo "<div class='alert alert-danger w-25 m-2' role='alert'>Erreur : " . $e->getMessage() . "</div>";
+    }
 }
 ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
