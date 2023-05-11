@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Defi write read</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
 <body>
 <?php
 try{
-
+//connexion à la base de données
 require 'connexion.php';
+// chargement des classes
 include_once 'Message.php';
 require 'MessageManager.php';
 
@@ -21,12 +22,11 @@ $messageManager = new MessageManager($pdo);
 
 // create database defi
 $pdo->exec("CREATE DATABASE IF NOT EXISTS defi");
-
 // use database defi
 $pdo->exec("USE defi");
 
 // create table messages
-include_once 'create_table_messages.php';
+//include_once 'create_table_messages.php';
 
 // créer un nouveau message
 include_once 'form.php';
