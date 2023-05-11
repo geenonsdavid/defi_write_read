@@ -14,9 +14,12 @@ try{
 
 require 'connexion.php';
 include_once 'Message.php';
+require 'MessageManager.php';
+
+/// créer class gestionnaire de message
+$messageManager = new MessageManager($pdo);
 
 // create database defi
-
 $pdo->exec("CREATE DATABASE IF NOT EXISTS defi");
 
 // use database defi
@@ -25,33 +28,15 @@ $pdo->exec("USE defi");
 // create table messages
 include_once 'create_table_messages.php';
 
-// Ajout d'un message
-
+// créer un nouveau message
 include_once 'form.php';
 
+// affiche nombre de messages
+$messageManager->countMessage();
 
-// connaitre nombre de messages
-$request ='SELECT COUNT(*) AS nb_messages FROM messages';
-$pdoStatement = $pdo->prepare($request);
-$pdoStatement->execute();
-$nb_messages = $pdoStatement->fetch(PDO::FETCH_ASSOC);
+// afficher les messages
+$messageManager->getMessage();
 
-// Récupération des messages
-
-$request = $pdo->prepare('SELECT message,date,id FROM messages');
-$request->execute();
-
-// affichage des messages
-
-while ($message = $request->fetch(PDO::FETCH_ASSOC)) {
-    echo "<div class='card w-25 m-2'>";
-    echo "<div class='card-body'>";
-    echo "<p class='card-text'>" . $message['message'] . "</p>";
-    echo "<p class='card-text'>" . $message['date'] . "</p>";
-    echo "<a href='delete.php?id=" . $message['id'] . "' class='btn btn-danger'>Supprimer</a>";
-    echo "</div>";
-    echo "</div>";
-}
 }
 catch(PDOException $e){
     
