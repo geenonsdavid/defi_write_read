@@ -14,10 +14,35 @@ class MessageManager
         $this->pdo = $pdo;
     }
 
-    public function addMessage(string $content): bool
+    public function addMessage(Message $content): bool
     {
-        $request = $this->pdo->prepare('INSERT INTO messages (message) VALUES (:message)');
-        $request->bindParam(':message', $content);
-        return $request->execute();
+        // ajoute le message
+        $request = $this->pdo->prepare('INSERT INTO messages (message,date) VALUES (:message,:date)');
+        $request->bindValue(':message', $content->getContent());
+        $request->bindValue(':date', $content->getDate()->format('Y-m-d H:i:s'));
+        $request->execute();
+        return true;
     }
+
+    // affiche message
+    
+    public function getMessage()
+    {
+        $request = $this->pdo->query('SELECT * FROM messages');
+        while ($data = $request->fetch()) {
+            echo "<div class='alert alert-primary w-25 m-2' role='alert'>" . $data['message'] . "</br>".$data['date'].
+            // créer un lien pour effacer le message en utilisant la methode deleteMessage
+            "<a href='delete.php?id=" . $data['id'] . "' class='btn btn-danger m-2'>Effacer</a></div>";
+
+
+        }
+    }
+
+    // afficher nombre de messages
+    public function countMessage()
+    {
+        $request = $this->pdo->query('SELECT * FROM messages');
+        echo "<div class='alert alert-primary w-25 m-2' role='alert'>Il y a " . $request->rowCount() . " messages</div>";
+    }
+
 }
