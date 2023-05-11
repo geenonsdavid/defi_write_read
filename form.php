@@ -6,15 +6,9 @@ echo '<textarea name="message" id="message" cols="30" rows="1" class="form-contr
 echo '<button type="submit" class="btn btn-primary m-2">Envoyer</button>';
 echo '</form>';
 
-// ajoute le message
- if ($_SERVER['REQUEST_METHOD'] === 'POST' AND !empty($_POST['message'])){
-    $request = $pdo->prepare("INSERT INTO messages (message) VALUES (:message)");
+// créer new message
+if (!empty($_POST['message'])) {
     $message = new Message($_POST['message']);
-    $request->bindParam(':message', $message->getContent());
-    $request->execute();
-    
-
+    $messageManager->addMessage($message);
     header('Location: index.php');
- }else{
-    echo "<div class='alert alert-danger w-25 m-2' role='alert'>Veuillez saisir un message</div>";
- }
+}
