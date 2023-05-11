@@ -30,7 +30,7 @@ class MessageManager
     {
         $request = $this->pdo->query('SELECT * FROM messages');
         while ($data = $request->fetch()) {
-            echo "<div class='alert alert-primary w-25 m-2' role='alert'>" . $data['message'] . "</br>".$data['date'].
+            echo "<div class='alert alert-info w-25 my-1 p-1' role='alert'>" . $data['message'] . "</br>".$data['date'].
             // créer un lien pour effacer le message en utilisant la methode deleteMessage
             "<a href='delete.php?id=" . $data['id'] . "' class='btn btn-danger m-2'>Effacer</a></div>";
 
@@ -42,7 +42,7 @@ class MessageManager
     public function countMessage()
     {
         $request = $this->pdo->query('SELECT * FROM messages');
-        echo "<div class='alert alert-primary w-25 m-2' role='alert'>Il y a " . $request->rowCount() . " messages</div>";
+        echo "<div class='alert alert-primary w-25 m-0' role='alert'>Il y a " . $request->rowCount() . " messages</div>";
     }
 
 }
