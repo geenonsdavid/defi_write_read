@@ -26,7 +26,7 @@ $pdo->exec("CREATE DATABASE IF NOT EXISTS defi");
 $pdo->exec("USE defi");
 
 // create table messages
-//include_once 'create_table_messages.php';
+include_once 'create_table_messages.php';
 
 // créer un nouveau message
 include_once 'form.php';
