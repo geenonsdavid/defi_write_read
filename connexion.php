@@ -1,4 +1,5 @@
 <?PHP
+
 $host = "https://www.cleardb.com/service/1.0/api";
 $dbName = "defi";
 
