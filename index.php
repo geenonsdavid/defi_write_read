@@ -17,10 +17,10 @@ include_once 'Message.php';
 
 // create database defi
 
-$pdo->exec("CREATE DATABASE IF NOT EXISTS defi");
+//$pdo->exec("CREATE DATABASE IF NOT EXISTS defi");
 
 // use database defi
-$pdo->exec("USE defi");
+$pdo->exec("USE wnqsbktgjcpzjw7c");
 
 // create table messages
 include_once 'create_table_messages.php';
