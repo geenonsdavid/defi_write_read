@@ -1,6 +1,6 @@
 <?PHP
 
-$host = "www.cleardb.com/";
+$host = "www.cleardb.com";
 $dbName = "defi";
 
 // Connexion à la base de données
