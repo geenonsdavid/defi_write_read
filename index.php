@@ -15,13 +15,6 @@ try{
 require 'connexion.php';
 include_once 'Message.php';
 
-// create database defi
-
-//$pdo->exec("CREATE DATABASE IF NOT EXISTS defi");
-
-// use database defi
-$pdo->exec("USE $dbName");
-
 // create table messages
 include_once 'create_table_messages.php';
 
