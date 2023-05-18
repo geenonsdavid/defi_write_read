@@ -3,8 +3,7 @@
 $id = $_GET['id'];
 // connexion à la base de données
 include_once 'connexion.php';
-// utilisation de la base de données defi
-$pdo->exec("USE defi");
+
 // efface le message
 $pdo->exec("DELETE FROM messages WHERE id = $id");
 // retourne à la page index.php
