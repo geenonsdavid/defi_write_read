@@ -16,6 +16,10 @@ if (getenv('JAWSDB_URL') !== false){
 }
 
 try{
+
+    // create database defi
+    $pdo = new PDO("mysql:host=$host;charset=utf8", $user, $pass);
+    $pdo->exec("CREATE DATABASE IF NOT EXISTS $dbName");
     // Connexion à la base de données
     $pdo = new PDO("mysql:host=$host;dbname=$dbName;charset=utf8", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
